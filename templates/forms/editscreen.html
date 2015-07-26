@@ -1,0 +1,86 @@
+	{% extends 'layouts/main.html' %}
+
+	   {% block content %}
+	   
+
+	    	<form id="ff"  class="form-group" action="/milkprofileForm" method="post">
+					<div class="form-group">
+						<label for="name">Select Milk Animal:</label>
+						<select name="select" data-options="required:true">
+						  <option value="value1">Value 1</option> 
+						  <option value="value2" selected>Value 2</option>
+						  <option value="value3">Value 3</option>
+						</select>
+						</div>
+					<div class="form-group">
+						<label for="name">Select Milk Type:</label><br>
+						<input type="radio" name="group2" value="fullcream"> Full Cream<br>
+						<input type="radio" name="group2" value="toned"> Toned<br>
+						<input type="radio" name="group2" value="doubletoned"> Double Toned<br>
+					</div>
+					<div class="form-group">
+						<label for="name">Select Quantity:</label>
+						<select name="select" data-options="required:true">
+						  <option value="value1">Value 1</option> 
+						  <option value="value2" selected>Value 2</option>
+						  <option value="value3">Value 3</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="name">Select Brand:</label>
+						<select name="select" data-options="required:true">
+						  <option value="value1">Value 1</option> 
+						  <option value="value2" selected>Value 2</option>
+						  <option value="value3">Value 3</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="name">Select Date and Time:</label>
+					<input class="easyui-datetimespinner" name="dateofdelivery" style="width:300px">
+					</div>
+						
+					<div class="form-group">
+						<label for="deliverydays"> Select Delivery Days</label>
+						<br>
+						<input type="checkbox" name="vehicle" value="Bike"> All </input>
+						<br>
+						<input type="checkbox" name="vehicle" value="Bike"> Sunday </input>
+						<input type="checkbox" name="vehicle" value="Bike"> Monday </input>
+						<br>
+						<input type="checkbox" name="vehicle" value="Bike"> Tuesday </input>
+						<input type="checkbox" name="vehicle" value="Bike"> Wednesday </input>
+						<br>
+						<input type="checkbox" name="vehicle" value="Bike"> Thursday </input>
+						<input type="checkbox" name="vehicle" value="Bike"> Friday </input>
+						<br>
+						<input type="checkbox" name="vehicle" value="Bike"> Saturday </input>
+					</div>
+						
+					<div class="form-group">
+						<label for="address"> Address goes here</label>
+					<div class="form-group">
+	                       <label for="name">Name:</label>
+	                       <input class="easyui-validatebox" type="text" name="name" required="true"></input>
+	                </div>
+					<div class="form-group">
+						<label for="address">Address:</label>
+						<textarea name="address" style="height:60px;"></textarea>
+						</div>
+					<div class="form-group">
+	                       <label for="name">Pincode:</label>
+	                       <input class="easyui-validatebox" type="text" name="pincode" required="true"></input>
+	                </div>
+					<div class="form-group">
+	                       <label for="name">Contact no.:</label>
+	                       <input class="easyui-validatebox" type="text" name="contactno" required="true"></input>
+	                </div>
+					<div class="form-group">
+						
+					<div class="form-group">
+	                        <input id="submit" type="submit" value="Submit">
+	                </div>
+					<div id="message"></div>
+			</form>
+
+	   {% endblock %}
+
