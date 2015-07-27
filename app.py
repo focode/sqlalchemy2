@@ -1,5 +1,5 @@
 from databases.database import db_session
-from databases.models import User
+from databases.models import User,Profile
 from flask import Flask,render_template, request, jsonify
 
 app = Flask(__name__)
@@ -13,11 +13,13 @@ def milkprofile():
 @app.route('/milkprofileForm', methods=['POST','GET'])
 def postprofile():
 	print "something is comming here"
-	contactnoo =  request.form['contactno'];
+	contactnoo =  request.form['contactno']
 	print "Value of contactnoo is :",contactnoo,request.form
 	print request
-	dateval = request.form['dateofdelivery'];
+	dateval = request.form['dateofdelivery']
+    address = request.from['address']
 	print "value of date=",
+    profile = Profile(milk_type)
 	return 'OK'
 
 
