@@ -19,7 +19,7 @@ class Profile(Base):
     __tablename__ = 'profile'
     idprofile = Column(Integer,primary_key=True)
     milk_type = Column(String(450))
-    quantity = Column(Integer(450))
+    quantity = Column(Integer)
     brand = Column(String(450))
     start_date = Column(TIMESTAMP)
     delivery_days = Column(String(450))
