@@ -28,8 +28,7 @@ class Profile(Base):
     pincode = Column(String(450))
     contact_no = Column(String(450))
 
-    def __init__(self,idprofile=None,milk_type=None,quantity=None,brand=None,start_date=None,delivery_days=None,name=None,address=None,pincode=None,contact_no=None):
-        self.idprofile = idprofile
+    def __init__(self,milk_type=None,quantity=None,brand=None,start_date=None,delivery_days=None,name=None,address=None,pincode=None,contact_no=None):
         self.milk_type = milk_type
         self.quantity = quantity
         self.brand = brand

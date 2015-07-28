@@ -12,17 +12,19 @@ def milkprofile():
 
 @app.route('/milkprofileForm', methods=['POST','GET'])
 def postprofile():
-	print "something is comming here"
-	contactnoo =  request.form['contactno']
-	print "Value of contactnoo is :",contactnoo,request.form
-	print request
-	dateval = request.form['dateofdelivery']
-    address = request.from['address']
-	print "value of date=",
-    profile = Profile(milk_type)
-	return 'OK'
-
-
+    start_date = request.form['start_date']
+    delivery_days = request.form['delivery_days']
+    milk_type = request.form['milk_type']
+    quantity = request.form['quantity']
+    brand = request.form['brand']
+    name = request.form['name']
+    address = request.form['address']
+    pincode = request.form['pincode']
+    contact_no = request.form['contact_no']
+    profile = Profile(milk_type,quantity,brand,start_date,delivery_days,name,address,pincode,contact_no)
+    db_session.add(profile)
+    db_session.commit()
+    return 'OK'
 
 @app.route('/abc')
 def hello_world():
