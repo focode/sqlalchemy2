@@ -1,61 +1,51 @@
-from databases.database import db_session
-from databases.models import User,Profile
-from flask import Flask,render_template, request, jsonify
+from flask import Flask, session, g, render_template
+from flask.ext.openid import OpenID
 
 app = Flask(__name__)
+app.config.from_object('websiteconfig')
+
+from flask_website.openid_auth import DatabaseOpenIDStore
+oid = OpenID(app, store_factory=DatabaseOpenIDStore)
 
 
-@app.route('/milkprofile', methods=['POST','GET'])
-def milkprofile():
-
-	return render_template('forms/editscreen.html')
-
-@app.route('/milkprofileForm', methods=['POST','GET'])
-def postprofile():
-    print request.form
-    start_date_time = request.form['start_date']
-    start_date_time = '2014-04-02 08:49:43'
-    print "start_date:",start_date_time
-    All = request.form['All']
-    Sunday = request.form['Sunday']
-    Monday = request.form['Monday']
-    Tuesday = request.form['Tuesday']
-    Wednesday = request.form['Wednesday']
-    Thursday = request.form['Thursday']
-    Friday = request.form['Friday']
-    Saturday = request.form['Saturday']
-
-    print "All:",All,"Sunday:",Sunday,"Monday:",Monday,"Tuesday:",Tuesday,"Wednesday:",Wednesday,"Thursday:",Thursday,"Friday:",Friday,"Saturday:",Saturday
-    milk_type = request.form['milk_type']
-    print "milk_type:",milk_type
-    quantity = request.form['quantity']
-    print "quantity:",quantity
-    brand = request.form['brand']
-    print "brand:",brand
-    name = request.form['name']
-    print "name:",name
-    address = request.form['address']
-    print "address:",address
-    pincode = request.form['pincode']
-    print "pincode:",pincode
-    contact_no = request.form['contact_no']
-    print "contact_no:",contact_no
-    profile = Profile(milk_type,quantity,brand,start_date_time,"rtyui",name,address,pincode,contact_no)
-    db_session.add(profile)
-    db_session.commit()
-    return 'OK'
-
-@app.route('/abc')
-def hello_world():
-    u = User('admin', 'admin@localhost')
-    db_session.add(u)
-    db_session.commit()
-
-    return 'Hello World!'
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html'), 404
 
 
-if __name__ == '__main__':
+@app.before_request
+def load_current_user():
+    g.user = User.query.filter_by(openid=session['openid']).first() \
+        if 'openid' in session else None
 
-    app.debug = True
-    app.run()
 
+@app.teardown_request
+def remove_db_session(exception):
+    db_session.remove()
+
+
+app.add_url_rule('/docs/', endpoint='docs.index', build_only=True)
+app.add_url_rule('/docs/<path:page>/', endpoint='docs.show',
+                 build_only=True)
+app.add_url_rule('/docs/flask-docs.pdf', endpoint='docs.pdf',
+                 build_only=True)
+app.add_url_rule('/docs/flask-docs.zip', endpoint='docs.zip',
+                 build_only=True)
+
+from flask_website.views import general
+from flask_website.views import community
+from flask_website.views import mailinglist
+from flask_website.views import snippets
+from flask_website.views import extensions
+app.register_blueprint(general.mod)
+app.register_blueprint(community.mod)
+app.register_blueprint(mailinglist.mod)
+app.register_blueprint(snippets.mod)
+app.register_blueprint(extensions.mod)
+
+from flask_website.database import User, db_session
+from flask_website import utils
+
+app.jinja_env.filters['datetimeformat'] = utils.format_datetime
+app.jinja_env.filters['timedeltaformat'] = utils.format_timedelta
+app.jinja_env.filters['displayopenid'] = utils.display_openid
