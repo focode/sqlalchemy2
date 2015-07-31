@@ -12,16 +12,35 @@ def milkprofile():
 
 @app.route('/milkprofileForm', methods=['POST','GET'])
 def postprofile():
-    start_date = request.form['start_date']
-    delivery_days = request.form['delivery_days']
+    print request.form
+    start_date_time = request.form['start_date']
+    start_date_time = '2014-04-02 08:49:43'
+    print "start_date:",start_date_time
+    All = request.form['All']
+    Sunday = request.form['Sunday']
+    Monday = request.form['Monday']
+    Tuesday = request.form['Tuesday']
+    Wednesday = request.form['Wednesday']
+    Thursday = request.form['Thursday']
+    Friday = request.form['Friday']
+    Saturday = request.form['Saturday']
+
+    print "All:",All,"Sunday:",Sunday,"Monday:",Monday,"Tuesday:",Tuesday,"Wednesday:",Wednesday,"Thursday:",Thursday,"Friday:",Friday,"Saturday:",Saturday
     milk_type = request.form['milk_type']
+    print "milk_type:",milk_type
     quantity = request.form['quantity']
+    print "quantity:",quantity
     brand = request.form['brand']
+    print "brand:",brand
     name = request.form['name']
+    print "name:",name
     address = request.form['address']
+    print "address:",address
     pincode = request.form['pincode']
+    print "pincode:",pincode
     contact_no = request.form['contact_no']
-    profile = Profile(milk_type,quantity,brand,start_date,delivery_days,name,address,pincode,contact_no)
+    print "contact_no:",contact_no
+    profile = Profile(milk_type,quantity,brand,start_date_time,"rtyui",name,address,pincode,contact_no)
     db_session.add(profile)
     db_session.commit()
     return 'OK'
