@@ -1,6 +1,7 @@
 from dailybasis.databases.database import db_session
 from dailybasis.databases.models import User,Profile
-from flask import Flask,render_template, request, jsonify,Blueprint
+from flask import Flask,render_template, request, jsonify,Blueprint,url_for,redirect,session,g,flash,abort
+
 
 mod = Blueprint('milk', __name__,template_folder='templates')
 
@@ -13,6 +14,7 @@ def milkprofile():
 
 @mod.route('/milkprofileForm', methods=['POST','GET'])
 def postprofile():
+
     print request.form
     start_date_time = request.form['start_date']
     start_date_time = '2014-04-02 08:49:43'
@@ -44,7 +46,23 @@ def postprofile():
     profile = Profile(milk_type,quantity,brand,start_date_time,"rtyui",name,address,pincode,contact_no)
     db_session.add(profile)
     db_session.commit()
-    return 'OK'
+    return render_template('/forms/allprofiles.html')
+#    allprofiles()
+#    redirect(url_for('milk.allprofiles'))
+#   return render_template('/forms/allprofiles.html', meassage='ok')
+#    return  redirect(url_for('milk.allprofiles'))
+#    return render_template('/forms/allprofiles.html', meassage='ok')
+#    return redirect (url_for('milk.allprofiles'))
+
+@mod.route('/')
+def home():
+    return render_template('/forms/home.html')
+
+
+@mod.route('/allprofiles')
+def allprofiles():
+    return render_template('/forms/allprofiles.html')
+
 
 @mod.route('/abc')
 def hello_world():
