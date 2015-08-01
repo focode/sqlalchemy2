@@ -2,7 +2,7 @@ from dailybasis.databases.database import db_session
 from dailybasis.databases.models import User,Profile
 from flask import Flask,render_template, request, jsonify,Blueprint
 
-mod = Blueprint('mailinglist', __name__)
+mod = Blueprint('milk', __name__,template_folder='templates')
 
 app = Flask(__name__)
 

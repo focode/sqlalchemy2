@@ -61,7 +61,7 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li {% if request.endpoint == 'milkprofile' %} class="active" {% endif %}><a href="{{ url_for('milkprofile') }}">milkprofile</a></li>
+            <li {% if request.endpoint == 'milkprofile' %} class="active" {% endif %}><a href="{{ url_for('milk.milkprofile') }}">milkprofile</a></li>
 			<li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
               <ul class="dropdown-menu">

@@ -1,5 +1,5 @@
 from flask import Flask, session, g, render_template
-
+from views import milkprofile
 
 app = Flask(__name__)
 #app.config.from_object('websiteconfig')
