@@ -1,5 +1,5 @@
-from databases.database import db_session
-from databases.models import User,Profile
+from dailybasis.databases.database import db_session
+from dailybasis.databases.models import User,Profile
 from flask import Flask,render_template, request, jsonify,Blueprint
 
 mod = Blueprint('mailinglist', __name__)
