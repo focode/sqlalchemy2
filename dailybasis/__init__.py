@@ -33,5 +33,5 @@ from dailybasis.views import milkprofile
 
 app.register_blueprint(milkprofile.mod)
 
-from dailybasis.databases import User, db_session
+from dailybasis.databases.database import db_session
 
