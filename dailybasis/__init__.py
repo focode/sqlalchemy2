@@ -1,5 +1,5 @@
 from flask import Flask, session, g, render_template
-from views import milkprofile
+from views import milkprofile,profile
 
 app = Flask(__name__)
 #app.config.from_object('websiteconfig')
@@ -32,6 +32,7 @@ app.add_url_rule('/docs/flask-docs.zip', endpoint='docs.zip',
 from dailybasis.views import milkprofile
 
 app.register_blueprint(milkprofile.mod)
+app.register_blueprint(profile.mod)
 
 from dailybasis.databases.database import db_session
 

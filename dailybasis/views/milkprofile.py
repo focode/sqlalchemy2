@@ -59,9 +59,6 @@ def home():
     return render_template('/forms/home.html')
 
 
-@mod.route('/allprofiles')
-def allprofiles():
-    return render_template('/forms/allprofiles.html')
 
 
 @mod.route('/abc')
