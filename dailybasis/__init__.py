@@ -1,7 +1,9 @@
 from flask import Flask, session, g, render_template
 from views import milkprofile,profile
+from flask_json import FlaskJSON, JsonError, json_response, as_json
 
 app = Flask(__name__)
+json = FlaskJSON(app)
 #app.config.from_object('websiteconfig')
 
 

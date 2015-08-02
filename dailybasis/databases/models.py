@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, TIMESTAMP
 from database import Base
+import json
 
 class User(Base):
     __tablename__ = 'users'
@@ -38,7 +39,23 @@ class Profile(Base):
         self.address = address
         self.pincode = pincode
         self.contact_no = contact_no
-    def __repr__(self):
-        return '<name %r>' % (self.name)
+
+    def __str__(self):
+        """Return the string representation of a mention."""
+        return self.text
+
+    def to_json(self):
+        return {
+                "milk_type": self.milk_type,
+                "quantity": str(self.quantity),
+                "brand": self.brand,
+                "start_date_time": str(self.start_date_time),
+                "delivery_days": str(self.delivery_days),
+                "name": self.name,
+                "address": str(self.address),
+                "pincode": str(self.pincode),
+                "contact_no": self.contact_no}
+
+
 
 
