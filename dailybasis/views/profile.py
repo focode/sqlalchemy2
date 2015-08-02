@@ -15,7 +15,7 @@ def allprofiles():
     val2 = db_session.query(Profile).all()
     val3 = map(Profile.to_json,val2)
     print val3
-    return jsonify({'devices': val3})
+    return jsonify({'profiles': val3})
 #    return val3
 #    return jsonify(val3)
 #    resp = Response(val3, status=200, mimetype='application/json')
