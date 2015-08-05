@@ -3,20 +3,6 @@ from database import Base
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
 
-class User(Base):
-    __tablename__ = 'users'
-    id = Column(Integer, primary_key=True)
-    name = Column(String(50), unique=True)
-    email = Column(String(120), unique=True)
-
-    def __init__(self, name=None, email=None):
-        self.name = name
-        self.email = email
-
-    def __repr__(self):
-        return '<User %r>' % (self.name)
-
-
 class Profile(Base):
     __tablename__ = 'profile'
     idprofile = Column(Integer,primary_key=True)

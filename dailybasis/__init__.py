@@ -1,15 +1,14 @@
 from flask import Flask, session, g, render_template
 from views import milkprofile,profile
 from flask_json import FlaskJSON, JsonError, json_response, as_json
-from flask_login import LoginManager
 
-login_manager = LoginManager()
+
+
 app = Flask(__name__)
-login_manager = LoginManager()
-login_manager.init_app(app)
+
 json = FlaskJSON(app)
 
-login_manager.login_view = 'login'
+
 
 #app.config.from_object('websiteconfig')
 

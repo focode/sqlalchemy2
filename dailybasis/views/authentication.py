@@ -1,8 +1,22 @@
 from dailybasis.databases.database import db_session
 from dailybasis.databases.models import User,Profile
 from flask import Flask,render_template, request, jsonify,Blueprint,url_for,redirect,session,g,flash,abort
+from flask_login import LoginManager
+from flask_login import login_user , logout_user , current_user , login_required
+
+login_manager = LoginManager()
+
+app = Flask(__name__)
+login_manager.init_app(app)
+
+login_manager.login_view = 'login'
 
 mod = Blueprint('auth', __name__,template_folder='templates')
+
+@mod.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 @mod.route('/login',methods=['GET','POST'])
 def login():
@@ -24,3 +38,7 @@ def login():
     login_user(registered_user, remember = remember_me)
     flash('Logged in successfully')
     return redirect(request.args.get('next') or url_for('index'))
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
