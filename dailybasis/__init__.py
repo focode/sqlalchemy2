@@ -1,9 +1,16 @@
 from flask import Flask, session, g, render_template
 from views import milkprofile,profile
 from flask_json import FlaskJSON, JsonError, json_response, as_json
+from flask_login import LoginManager
 
+login_manager = LoginManager()
 app = Flask(__name__)
+login_manager = LoginManager()
+login_manager.init_app(app)
 json = FlaskJSON(app)
+
+login_manager.login_view = 'login'
+
 #app.config.from_object('websiteconfig')
 
 
@@ -32,9 +39,11 @@ app.add_url_rule('/docs/flask-docs.zip', endpoint='docs.zip',
                  build_only=True)
 
 from dailybasis.views import milkprofile
+from dailybasis.views import authentication
 
 app.register_blueprint(milkprofile.mod)
 app.register_blueprint(profile.mod)
+app.register_blueprint(authentication.mod)
 
 from dailybasis.databases.database import db_session
 
